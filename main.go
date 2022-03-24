@@ -65,6 +65,7 @@ func main() {
 	e.File("/img/alibaba_logo.png", "img/alibaba_logo.png")
 	e.File("/img/tecent_logo.png", "img/tecent_logo.png")
 	e.File("/img/openshift_logo.png", "img/openshift_logo.png")
+	e.File("/img/gcp_logo.png", "img/gcp_logo.png")
 	e.File("/", "index.html")
 	e.File("/hello", "views/hello.html")
 	e.File("/create", "views/create.html")
@@ -177,6 +178,13 @@ func CreateNew(c echo.Context) error {
 			Value: r.FormValue("env3Value"),
 		}
 		envVars = append(envVars, var3)
+	}
+	if r.FormValue("env4Name") != "" && r.FormValue("env4Value") != "" {
+		var4 := corev1.EnvVar{
+			Name:  r.FormValue("env4Name"),
+			Value: r.FormValue("env4Value"),
+		}
+		envVars = append(envVars, var4)
 	}
 
 	tf := &tfv1.Terraform{
